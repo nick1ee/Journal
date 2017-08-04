@@ -213,16 +213,9 @@
                                     <constraint firstAttribute="height" constant="0.5" id="8gT-pA-H0e"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32Q-h6-teH">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Content" translatesAutoresizingMaskIntoConstraints="NO" id="32Q-h6-teH">
                                 <rect key="frame" x="22" y="400" width="331" height="203"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Aenean eu leo quam. Pellentesque ornare sem lacinia quam facilisis in, egestas eget quam. Donec sed odio dui. Duis mollis, est no.
-
-Luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas sed diam eget risus varius blandit sit amedinAenean eu leo quam. Pellentesque ornare sem lacinia quam facilisis in, egestas eget quam. Donec sed odio dui. Duis mollis, est no.
-
-Luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas sed diam eget risus varius blandit sit amedinAenean eu leo quam. Pellentesque ornare sem lacinia quam facilisis in, egestas eget quam. Donec sed odio dui. Duis mollis, est no.
-
-Luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Maecenas sed diam eget risus varius blandit sit amedin</mutableString>
                                 <color key="textColor" red="0.51483678817749023" green="0.61243230104446411" blue="0.59638363122940063" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>

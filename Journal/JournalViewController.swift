@@ -81,7 +81,11 @@ class JournalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        inputContent.delegate = self
+
         imagePlaceholder.isEnabled = false
+
+        addImageSpotlight()
 
         UIApplication.shared.statusBarStyle = .lightContent
 
@@ -144,6 +148,22 @@ class JournalViewController: UIViewController {
 
     }
 
+    func addImageSpotlight() {
+
+        imagePlaceholder.layer.shadowColor = UIColor.white.cgColor
+
+        imagePlaceholder.layer.shadowOpacity = 1
+
+        imagePlaceholder.layer.shadowOffset = CGSize(width: 0, height: 0)
+
+        imagePlaceholder.layer.shadowRadius = 50.0
+
+        imagePlaceholder.layer.cornerRadius = 40
+
+        imagePlaceholder.layer.masksToBounds = false
+
+    }
+
 }
 
 extension JournalViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -180,7 +200,7 @@ extension JournalViewController: UITextViewDelegate {
 
         if inputContent.text == "Content" {
 
-            inputContent.text = nil
+            inputContent.text = ""
 
         }
 
@@ -191,8 +211,6 @@ extension JournalViewController: UITextViewDelegate {
         if inputContent.text.isEmpty {
 
             inputContent.text = "Content"
-
-            inputContent.textColor = UIColor.lightGray
 
         }
     }
