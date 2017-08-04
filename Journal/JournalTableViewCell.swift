@@ -11,6 +11,8 @@ import UIKit
 class JournalTableViewCell: UITableViewCell {
     
     @IBOutlet weak var journalImageView: UIImageView!
+
+    @IBOutlet weak var journalImageContainerView: UIView!
     
     @IBOutlet weak var journalTitle: UILabel!
     
@@ -19,25 +21,21 @@ class JournalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        circleImageView.layer.borderColor = UIColor.lightGray.cgColor
+        circleImageView.layer.borderColor = UIColor.darkGray.cgColor
         
         circleImageView.layer.borderWidth = 0.5
         
-        journalImageView.layer.shadowColor = UIColor.black.cgColor
+        journalImageContainerView.layer.shadowColor = UIColor.lightGray.cgColor
         
-        journalImageView.layer.opacity = 0.5
+        journalImageContainerView.layer.shadowOpacity = 1
         
-        journalImageView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        journalImageContainerView.layer.shadowOffset = CGSize(width: 0, height: 0)
         
-        journalImageView.layer.shadowRadius = 5.0
+        journalImageContainerView.layer.shadowRadius = 5.0
         
-        journalImageView.layer.masksToBounds = false
-        
-        let shadowPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 2.1 * 8, height: journalImageView.frame.height))
-        
-        journalImageView.layer.shadowPath = shadowPath.cgPath
-        
-        
+        journalImageView.layer.cornerRadius = 8
+
+        journalImageView.layer.masksToBounds = true
 
     }
 

@@ -32,7 +32,7 @@ class JournalViewController: UIViewController {
     
     @IBAction func bntCancel(_ sender: UIButton) {
         
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -53,6 +53,8 @@ class JournalViewController: UIViewController {
             let journal = Journal.init(imageData: imageData, title: title, content: content, timeStamp: timestamp)
             
             CoreDataProvider().saveJournal(withJournal: journal)
+            
+            self.navigationController?.popViewController(animated: true)
 
         }
 
