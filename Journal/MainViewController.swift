@@ -81,9 +81,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section {
+        switch indexPath {
             
-        case 0:
+        case [0, 0]:
             
             let cell = journalTableView.dequeueReusableCell(withIdentifier: "titleCell") as! TitleTableViewCell
             
@@ -111,6 +111,39 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         index = indexPath.row
         
         self.performSegue(withIdentifier: "showJournalDetail", sender: nil)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
+        switch indexPath {
+            
+        case [0, 0]:
+            
+            return false
+            
+        default:
+            
+            return true
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            self.journalTableView.beginUpdates()
+            
+            journalTableView.deleteRows(at: [indexPath], with: .left)
+            
+            CoreDataProvider().deleteJournal(withJournal: self.journals[indexPath.row])
+
+            self.journals.remove(at: indexPath.row)
+            
+            self.journalTableView.endUpdates()
+            
+        }
         
     }
     
