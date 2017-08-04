@@ -22,8 +22,6 @@ struct Journal {
 
 extension Journal {
 
-//    typealias JournalObject = [String: Any]
-
     enum FetchJournalError: Error {
 
         case invalidJournalObject, missingImageData, missingTitle, missingContent, missingTimeStamp
@@ -81,20 +79,6 @@ extension Journal {
         }
 
         self.timeStamp = timeStamp
-
-    }
-
-    func toDictionary() -> [String: Any] {
-
-        let journalDictionary: [String: Any] = [Schema.imageData: self.imageData,
-
-                                                Schema.title: self.title,
-
-                                                Schema.content: self.content,
-
-                                                Schema.timeStamp: self.timeStamp]
-
-        return journalDictionary
 
     }
 

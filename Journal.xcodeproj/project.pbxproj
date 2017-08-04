@@ -11,6 +11,7 @@
 		B80B61E81F343507004A0E1F /* JournalModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B80B61E61F343507004A0E1F /* JournalModel.xcdatamodeld */; };
 		B80B61EA1F3436EF004A0E1F /* AppDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B61E91F3436EF004A0E1F /* AppDelegateExtensions.swift */; };
 		B80B61EC1F344ACA004A0E1F /* TitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B61EB1F344ACA004A0E1F /* TitleTableViewCell.swift */; };
+		B80B61F51F3471C6004A0E1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B61F41F3471C6004A0E1F /* Extensions.swift */; };
 		B8D9ECEB1F34006000B9FEED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECEA1F34006000B9FEED /* AppDelegate.swift */; };
 		B8D9ECED1F34006000B9FEED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECEC1F34006000B9FEED /* MainViewController.swift */; };
 		B8D9ECF01F34006000B9FEED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8D9ECEE1F34006000B9FEED /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		B80B61E71F343507004A0E1F /* JournalModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JournalModel.xcdatamodel; sourceTree = "<group>"; };
 		B80B61E91F3436EF004A0E1F /* AppDelegateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateExtensions.swift; sourceTree = "<group>"; };
 		B80B61EB1F344ACA004A0E1F /* TitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleTableViewCell.swift; sourceTree = "<group>"; };
+		B80B61F41F3471C6004A0E1F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B8D9ECE71F34005F00B9FEED /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D9ECEA1F34006000B9FEED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8D9ECEC1F34006000B9FEED /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				B80B61E31F3420F4004A0E1F /* CoreDataProvider.swift */,
 				B80B61E61F343507004A0E1F /* JournalModel.xcdatamodeld */,
 				B80B61EB1F344ACA004A0E1F /* TitleTableViewCell.swift */,
+				B80B61F41F3471C6004A0E1F /* Extensions.swift */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				B80B61EA1F3436EF004A0E1F /* AppDelegateExtensions.swift in Sources */,
 				B8D9ECED1F34006000B9FEED /* MainViewController.swift in Sources */,
 				B8D9ECFD1F3405ED00B9FEED /* JournalTableViewCell.swift in Sources */,
+				B80B61F51F3471C6004A0E1F /* Extensions.swift in Sources */,
 				B8D9ECEB1F34006000B9FEED /* AppDelegate.swift in Sources */,
 				B8D9ECFF1F3407D300B9FEED /* Journal.swift in Sources */,
 				B80B61EC1F344ACA004A0E1F /* TitleTableViewCell.swift in Sources */,
