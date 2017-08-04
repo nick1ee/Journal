@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80B61E41F3420F4004A0E1F /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B61E31F3420F4004A0E1F /* DataProvider.swift */; };
 		B8D9ECEB1F34006000B9FEED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECEA1F34006000B9FEED /* AppDelegate.swift */; };
 		B8D9ECED1F34006000B9FEED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D9ECEC1F34006000B9FEED /* MainViewController.swift */; };
 		B8D9ECF01F34006000B9FEED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8D9ECEE1F34006000B9FEED /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B80B61E31F3420F4004A0E1F /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		B8D9ECE71F34005F00B9FEED /* Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Journal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8D9ECEA1F34006000B9FEED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8D9ECEC1F34006000B9FEED /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				B8D9ECFC1F3405ED00B9FEED /* JournalTableViewCell.swift */,
 				B8D9ECFE1F3407D300B9FEED /* Journal.swift */,
 				B8D9ED001F34124F00B9FEED /* JournalViewController.swift */,
+				B80B61E31F3420F4004A0E1F /* DataProvider.swift */,
 			);
 			path = Journal;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80B61E41F3420F4004A0E1F /* DataProvider.swift in Sources */,
 				B8D9ECED1F34006000B9FEED /* MainViewController.swift in Sources */,
 				B8D9ECFD1F3405ED00B9FEED /* JournalTableViewCell.swift in Sources */,
 				B8D9ECEB1F34006000B9FEED /* AppDelegate.swift in Sources */,

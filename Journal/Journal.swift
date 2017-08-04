@@ -16,6 +16,8 @@ struct Journal {
     
     var content: String
     
+    var timeStamp: Int
+    
 }
 
 extension Journal {
@@ -24,7 +26,7 @@ extension Journal {
     
     enum FetchJournalError: Error {
         
-        case invalidJournalObject, missingImageData, missingTitle, missingContent
+        case invalidJournalObject, missingImageData, missingTitle, missingContent, missingTimeStamp
     
     }
     
@@ -35,6 +37,8 @@ extension Journal {
         static let title = "title"
         
         static let content = "content"
+        
+        static let timeStamp = "timeStamp"
         
     }
     
@@ -69,6 +73,14 @@ extension Journal {
         }
         
         self.content = content
+        
+        guard let timeStamp = journal[Schema.timeStamp] as? Int else {
+            
+            throw FetchJournalError.missingTimeStamp
+            
+        }
+        
+        self.timeStamp = timeStamp
 
     }
     
@@ -78,7 +90,9 @@ extension Journal {
                                                 
                                                 Schema.title: self.title,
                                                 
-                                                Schema.content: self.content]
+                                                Schema.content: self.content,
+        
+                                                Schema.timeStamp: self.timeStamp]
         
         return journalDictionary
 
