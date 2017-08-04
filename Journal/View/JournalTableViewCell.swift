@@ -21,7 +21,7 @@ class JournalTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        circleImageView.layer.borderColor = UIColor.darkGray.cgColor
+        circleImageView.layer.borderColor = UIColor.lightGray.cgColor
 
         circleImageView.layer.borderWidth = 0.5
 

@@ -1,5 +1,5 @@
 //
-//  AppDelegateExtensions.swift
+//  AppDelegateExtension.swift
 //  FireBlog
 //
 //  Created by Nick Lee on 14/07/2017.

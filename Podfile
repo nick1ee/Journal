@@ -7,5 +7,6 @@ target 'Journal' do
 
   # Pods for Journal
   pod 'SwiftLint'
+  pod 'IQKeyboardManagerSwift'
 
 end
