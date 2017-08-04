@@ -73,7 +73,7 @@ class JournalViewController: UIViewController {
 
         if self.receivedJournal != nil {
 
-            guard let data = receivedJournal?.imageData as? Data else { return }
+            guard let data = receivedJournal?.imageData else { return }
 
             uploadImageView.image = UIImage(data: data)
 

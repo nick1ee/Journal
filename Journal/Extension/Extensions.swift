@@ -110,14 +110,14 @@ extension JournalViewController {
             inputContent.text != "" {
 
             guard
-                let imageData = UIImagePNGRepresentation(uploadImageView.image!) as? NSData,
+                let data = UIImageJPEGRepresentation(uploadImageView.image!, 1),
                 let title = inputTitle.text,
                 let content = inputContent.text else { return }
 
             let timeToInteger = Int(Date().timeIntervalSince1970 * 1000.0)
             let timestamp = String(timeToInteger)
 
-            let journal = Journal.init(imageData: imageData, title: title, content: content, timeStamp: timestamp)
+            let journal = Journal.init(imageData: data, title: title, content: content, timeStamp: timestamp)
 
             CoreDataProvider().saveJournal(withJournal: journal)
 
