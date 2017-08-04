@@ -40,6 +40,22 @@ class JournalViewController: UIViewController {
     
     @IBAction func btnSave(_ sender: UIButton) {
         
+        if receivedJournal == nil {
+            
+            saveToCoreData()
+            
+        } else {
+            
+            CoreDataProvider().deleteJournal(withJournal: receivedJournal!)
+            
+            saveToCoreData()
+            
+        }
+
+    }
+    
+    func saveToCoreData() {
+        
         if isImageLoaded == true,
             inputTitle.text != "",
             inputContent.text != "" {
@@ -57,9 +73,9 @@ class JournalViewController: UIViewController {
             CoreDataProvider().saveJournal(withJournal: journal)
             
             self.navigationController?.popViewController(animated: true)
-
+            
         }
-
+        
     }
     
     override func viewDidLoad() {
@@ -89,9 +105,18 @@ class JournalViewController: UIViewController {
             
             remindLabel.isHidden = true
             
+            isImageLoaded = true
+            
             outletBtnSave.setTitle("Update", for: .normal)
             
         }
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.receivedJournal = nil
         
     }
     

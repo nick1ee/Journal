@@ -25,10 +25,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        journalTableView.estimatedRowHeight = 250
-        
-        journalTableView.rowHeight = UITableViewAutomaticDimension
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,6 +98,24 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.journalImageView.image = UIImage(data: data as Data)
             
             return cell
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        journalTableView.estimatedRowHeight = 250
+        
+        switch indexPath {
+            
+        case [0, 0]:
+            
+            return 50.0
+            
+        default:
+            
+            return UITableViewAutomaticDimension
+        
         }
         
     }
