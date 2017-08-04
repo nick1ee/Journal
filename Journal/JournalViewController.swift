@@ -32,6 +32,8 @@ class JournalViewController: UIViewController {
     
     @IBAction func bntCancel(_ sender: UIButton) {
         
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func btnSave(_ sender: UIButton) {
@@ -45,11 +47,12 @@ class JournalViewController: UIViewController {
                 let title = inputTitle.text,
                 let content = inputContent.text else { return }
             
-            let timestamp = Int(Date().timeIntervalSince1970 * 1000.0)
+            let timeToInteger = Int(Date().timeIntervalSince1970 * 1000.0)
+            let timestamp = String(timeToInteger)
             
             let journal = Journal.init(imageData: imageData, title: title, content: content, timeStamp: timestamp)
             
-            DataProvider().updataJournals(withJournal: journal)
+            CoreDataProvider().saveJournal(withJournal: journal)
 
         }
 

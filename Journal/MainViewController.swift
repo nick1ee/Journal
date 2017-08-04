@@ -28,7 +28,20 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        journals = DataProvider().fetchJournals()
+        do {
+            
+            let fetchedJournals = try CoreDataProvider().fetchJournals()
+            
+            self.journals = fetchedJournals!
+            
+            journalTableView.reloadData()
+            
+        } catch let error {
+            
+            // TODO: Error handling
+            print(error.localizedDescription)
+            
+        }
         
     }
 
@@ -44,21 +57,31 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        switch journals.count {
+            
+        case 0:
+            
+            return 1
+            
+        default:
+            
+            return journals.count
+            
+        }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if journals.count == 0 {
+        switch journals.count {
             
-            print("get in")
+        case 0:
             
             let cell = UITableViewCell()
             
             return cell
             
-        }else {
+        default:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath) as! JournalTableViewCell
             
@@ -71,7 +94,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.journalImageView.image = UIImage(data: data as Data)
             
             return cell
-            
         }
         
     }
