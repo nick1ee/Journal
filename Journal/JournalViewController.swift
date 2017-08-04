@@ -19,10 +19,8 @@ class JournalViewController: UIViewController {
     @IBOutlet weak var uploadImageView: UIImageView!
 
     @IBOutlet weak var imageTapView: UIView!
-    
-    @IBOutlet weak var imagePlaceholder: UIButton!
 
-//    @IBOutlet weak var defaultImageView: UIImageView!
+    @IBOutlet weak var imagePlaceholder: UIButton!
 
     @IBOutlet weak var remindLabel: UILabel!
 
@@ -82,7 +80,7 @@ class JournalViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         imagePlaceholder.isEnabled = false
 
         UIApplication.shared.statusBarStyle = .lightContent
@@ -172,6 +170,31 @@ extension JournalViewController: UIImagePickerControllerDelegate, UINavigationCo
 
         dismiss(animated: true, completion: nil)
 
+    }
+
+}
+
+extension JournalViewController: UITextViewDelegate {
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+
+        if inputContent.text == "Content" {
+
+            inputContent.text = nil
+
+        }
+
+    }
+
+    func textViewDidEndEditing(_ textView: UITextView) {
+
+        if inputContent.text.isEmpty {
+
+            inputContent.text = "Content"
+
+            inputContent.textColor = UIColor.lightGray
+
+        }
     }
 
 }
