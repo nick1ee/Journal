@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum FetchCoreDataError: Error {
+    
+    case invalidJournalObject, fetchContextFail
+    
+}
+
 class CoreDataProvider {
     
     var journals: [Journal] = []
@@ -30,10 +36,9 @@ class CoreDataProvider {
                     
                     fetchedJournals.append(journal)
                     
-                } catch let error {
+                } catch {
                     
-                    // TODO: Error handling
-                    print(error.localizedDescription)
+                    throw FetchCoreDataError.invalidJournalObject
                     
                 }
                 
@@ -43,15 +48,12 @@ class CoreDataProvider {
             
             return self.journals
             
-        } catch let error {
+        } catch {
             
-            // TODO: Error handling
-            print(error.localizedDescription)
+            throw FetchCoreDataError.fetchContextFail
             
         }
-        
-        return []
-        
+
     }
     
     func deleteJournal(withJournal journal: Journal) {
@@ -78,7 +80,6 @@ class CoreDataProvider {
             
         } catch let error {
             
-            // TODO: Error handlgin
             print(error.localizedDescription)
             
         }

@@ -42,7 +42,6 @@ class MainViewController: UIViewController {
             
         } catch let error {
             
-            // TODO: Error handling
             print(error.localizedDescription)
             
         }
