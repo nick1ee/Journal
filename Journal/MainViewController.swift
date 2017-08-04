@@ -10,9 +10,17 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var journals: [Journal] = []
+    
+    var index: Int?
+    
     @IBOutlet weak var journalTableView: UITableView!
     
-    var journals: [Journal] = []
+    @IBAction func btnCreateNewJournal(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "addNewJournal", sender: nil)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,16 +108,22 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        index = indexPath.row
+        
         self.performSegue(withIdentifier: "showJournalDetail", sender: nil)
         
     }
     
-    func addJournal() {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        performSegue(withIdentifier: "addNewJournal", sender: nil)
+        if segue.identifier == "showJournalDetail" {
+            
+            let detailVC = segue.destination as! JournalViewController
+            
+            detailVC.receivedJournal = journals[index!]
+            
+        }
         
     }
-    
-    
-    
+
 }

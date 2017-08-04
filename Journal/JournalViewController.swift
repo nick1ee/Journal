@@ -14,6 +14,8 @@ class JournalViewController: UIViewController {
     
     var isImageLoaded: Bool = false
     
+    var receivedJournal: Journal?
+    
     @IBOutlet weak var uploadImageView: UIImageView!
     
     @IBOutlet weak var imageTapView: UIView!
@@ -67,9 +69,29 @@ class JournalViewController: UIViewController {
 
         defaultImageView.tintColor = UIColor.white
         
+        outletBtnCancel.layer.cornerRadius = 22
+        
         addTapForImagePicker()
         
         imagePicker.delegate = self
+        
+        if self.receivedJournal != nil {
+            
+            let data = receivedJournal?.imageData as! Data
+            
+            uploadImageView.image = UIImage(data: data)
+            
+            inputTitle.text = receivedJournal?.title
+            
+            inputContent.text = receivedJournal?.content
+            
+            defaultImageView.isHidden = true
+            
+            remindLabel.isHidden = true
+            
+            outletBtnSave.setTitle("Update", for: .normal)
+            
+        }
         
     }
     
@@ -102,8 +124,6 @@ extension JournalViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-        
-        uploadImageView.contentMode = .scaleAspectFit
         
         uploadImageView.image = pickedImage
             
