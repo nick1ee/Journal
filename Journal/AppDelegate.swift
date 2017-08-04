@@ -14,14 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        return true
-    }
-
     // MARK: - Core Data stack
-    
+
     lazy var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: "JournalModel")
@@ -33,9 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-    
+
     // MARK: - Core Data Saving support
-    
+
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -50,4 +44,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

@@ -8,13 +8,14 @@
 
 import UIKit
 
+//swiftlint:disable force_cast
 extension AppDelegate {
-    
+
     class var shared: AppDelegate {
-        
+
         return UIApplication.shared.delegate as! AppDelegate
-        
+
     }
-    
-    
+
 }
+//swiftlint:enable force_cast
