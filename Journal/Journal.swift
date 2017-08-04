@@ -16,13 +16,13 @@ struct Journal {
     
     var content: String
     
-    var timeStamp: Int
+    var timeStamp: String
     
 }
 
 extension Journal {
     
-    typealias JournalObject = [String: Any]
+//    typealias JournalObject = [String: Any]
     
     enum FetchJournalError: Error {
         
@@ -44,13 +44,13 @@ extension Journal {
     
     init(object: Any) throws {
         
-        guard let journal = object as? JournalObject else {
+        guard let journal = object as? JournalModel else {
             
             throw FetchJournalError.invalidJournalObject
             
         }
         
-        guard let imageData = journal[Schema.imageData] as? NSData else {
+        guard let imageData = journal.imageData else {
             
             throw FetchJournalError.missingImageData
             
@@ -58,7 +58,7 @@ extension Journal {
         
         self.imageData = imageData
         
-        guard let title = journal[Schema.title] as? String else {
+        guard let title = journal.title else {
             
             throw FetchJournalError.missingTitle
             
@@ -66,7 +66,7 @@ extension Journal {
         
         self.title = title
         
-        guard let content = journal[Schema.content] as? String else {
+        guard let content = journal.content else {
             
             throw FetchJournalError.missingContent
             
@@ -74,7 +74,7 @@ extension Journal {
         
         self.content = content
         
-        guard let timeStamp = journal[Schema.timeStamp] as? Int else {
+        guard let timeStamp = journal.timeStamp else {
             
             throw FetchJournalError.missingTimeStamp
             

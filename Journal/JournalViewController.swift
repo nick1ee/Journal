@@ -14,6 +14,8 @@ class JournalViewController: UIViewController {
     
     var isImageLoaded: Bool = false
     
+    var receivedJournal: Journal?
+    
     @IBOutlet weak var uploadImageView: UIImageView!
     
     @IBOutlet weak var imageTapView: UIView!
@@ -32,9 +34,27 @@ class JournalViewController: UIViewController {
     
     @IBAction func bntCancel(_ sender: UIButton) {
         
+        self.navigationController?.popViewController(animated: true)
+        
     }
     
     @IBAction func btnSave(_ sender: UIButton) {
+        
+        if receivedJournal == nil {
+            
+            saveToCoreData()
+            
+        } else {
+            
+            CoreDataProvider().deleteJournal(withJournal: receivedJournal!)
+            
+            saveToCoreData()
+            
+        }
+
+    }
+    
+    func saveToCoreData() {
         
         if isImageLoaded == true,
             inputTitle.text != "",
@@ -45,14 +65,17 @@ class JournalViewController: UIViewController {
                 let title = inputTitle.text,
                 let content = inputContent.text else { return }
             
-            let timestamp = Int(Date().timeIntervalSince1970 * 1000.0)
+            let timeToInteger = Int(Date().timeIntervalSince1970 * 1000.0)
+            let timestamp = String(timeToInteger)
             
             let journal = Journal.init(imageData: imageData, title: title, content: content, timeStamp: timestamp)
             
-            DataProvider().updataJournals(withJournal: journal)
-
+            CoreDataProvider().saveJournal(withJournal: journal)
+            
+            self.navigationController?.popViewController(animated: true)
+            
         }
-
+        
     }
     
     override func viewDidLoad() {
@@ -62,9 +85,38 @@ class JournalViewController: UIViewController {
 
         defaultImageView.tintColor = UIColor.white
         
+        outletBtnCancel.layer.cornerRadius = 22
+        
         addTapForImagePicker()
         
         imagePicker.delegate = self
+        
+        if self.receivedJournal != nil {
+            
+            let data = receivedJournal?.imageData as! Data
+            
+            uploadImageView.image = UIImage(data: data)
+            
+            inputTitle.text = receivedJournal?.title
+            
+            inputContent.text = receivedJournal?.content
+            
+            defaultImageView.isHidden = true
+            
+            remindLabel.isHidden = true
+            
+            isImageLoaded = true
+            
+            outletBtnSave.setTitle("Update", for: .normal)
+            
+        }
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.receivedJournal = nil
         
     }
     
@@ -97,8 +149,6 @@ extension JournalViewController: UIImagePickerControllerDelegate, UINavigationCo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-        
-        uploadImageView.contentMode = .scaleAspectFit
         
         uploadImageView.image = pickedImage
             

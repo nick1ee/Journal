@@ -10,25 +10,42 @@ import UIKit
 
 class MainViewController: UIViewController {
     
+    var journals: [Journal] = []
+    
+    var index: Int?
+    
     @IBOutlet weak var journalTableView: UITableView!
     
-    var journals: [Journal] = []
+    @IBAction func btnCreateNewJournal(_ sender: UIButton) {
+        
+        performSegue(withIdentifier: "addNewJournal", sender: nil)
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        journalTableView.estimatedRowHeight = 250
-        
-        journalTableView.rowHeight = UITableViewAutomaticDimension
-        
-        UIApplication.shared.statusBarStyle = .default
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        journals = DataProvider().fetchJournals()
+        UIApplication.shared.statusBarStyle = .default
+        
+        do {
+            
+            let fetchedJournals = try CoreDataProvider().fetchJournals()
+            
+            self.journals = fetchedJournals!
+            
+            journalTableView.reloadData()
+            
+        } catch let error {
+            
+            // TODO: Error handling
+            print(error.localizedDescription)
+            
+        }
         
     }
 
@@ -38,29 +55,39 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1
+        return 2
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 2
+        switch section {
+            
+        case 0:
+            
+            return 1
+            
+        default:
+            
+            return journals.count
+            
+        }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if journals.count == 0 {
+        switch indexPath {
             
-            print("get in")
+        case [0, 0]:
             
-            let cell = UITableViewCell()
+            let cell = journalTableView.dequeueReusableCell(withIdentifier: "titleCell") as! TitleTableViewCell
             
             return cell
             
-        }else {
+        default:
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath) as! JournalTableViewCell
+            let cell = journalTableView.dequeueReusableCell(withIdentifier: "journalCell", for: indexPath) as! JournalTableViewCell
             
             cell.journalTitle.text = journals[indexPath.row].title
             
@@ -71,69 +98,79 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             cell.journalImageView.image = UIImage(data: data as Data)
             
             return cell
-            
         }
         
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if section == 0 {
+        journalTableView.estimatedRowHeight = 250
+        
+        switch indexPath {
             
-            let screen = UIScreen.main.bounds
+        case [0, 0]:
             
-            let slate = UIColor.init(red: 67/255, green: 86/255, blue: 97/255, alpha: 1)
+            return 50.0
             
-            let dustyOrange = UIColor.init(red: 237/255, green: 96/255, blue: 81/255, alpha: 1)
+        default:
             
-            let header = UIView(frame: CGRect(x: 0, y: 0, width: screen.width, height: 50))
-            
-            let journalLabel = UILabel(frame: CGRect(x: 25, y: 5, width: 150, height: 40))
-            
-            let title = NSAttributedString(string: "My Journals", attributes: [NSForegroundColorAttributeName: slate])
-            
-            journalLabel.font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightSemibold)
-            
-            journalLabel.attributedText = title
-            
-            let addButton = UIButton(frame: CGRect(x: screen.width - 60, y: 3, width: 44, height: 44))
-            
-            addButton.setImage(UIImage(named: "icon_plus"), for: .normal)
-            
-            addButton.tintColor = dustyOrange
-            
-            addButton.addTarget(self, action: #selector(self.addJournal), for: UIControlEvents.touchDown)
-            
-            header.addSubview(journalLabel)
-            
-            header.addSubview(addButton)
-            
-            return header
-            
+            return UITableViewAutomaticDimension
+        
         }
-        
-        return nil
-        
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        return 50.0
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        index = indexPath.row
+        
         self.performSegue(withIdentifier: "showJournalDetail", sender: nil)
         
     }
     
-    func addJournal() {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        performSegue(withIdentifier: "addNewJournal", sender: nil)
+        switch indexPath {
+            
+        case [0, 0]:
+            
+            return false
+            
+        default:
+            
+            return true
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            self.journalTableView.beginUpdates()
+            
+            journalTableView.deleteRows(at: [indexPath], with: .left)
+            
+            CoreDataProvider().deleteJournal(withJournal: self.journals[indexPath.row])
+
+            self.journals.remove(at: indexPath.row)
+            
+            self.journalTableView.endUpdates()
+            
+        }
         
     }
     
-    
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "showJournalDetail" {
+            
+            let detailVC = segue.destination as! JournalViewController
+            
+            detailVC.receivedJournal = journals[index!]
+            
+        }
+        
+    }
+
 }
