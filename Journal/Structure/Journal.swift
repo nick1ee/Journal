@@ -10,7 +10,7 @@ import Foundation
 
 struct Journal {
 
-    var imageData: NSData
+    var imageData: Data
 
     var title: String
 
@@ -48,13 +48,13 @@ extension Journal {
 
         }
 
-        guard let imageData = journal.imageData else {
+        guard let data = journal.imageData else {
 
             throw FetchJournalError.missingImageData
 
         }
 
-        self.imageData = imageData
+        self.imageData = data as Data
 
         guard let title = journal.title else {
 
